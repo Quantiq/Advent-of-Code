@@ -26,7 +26,7 @@ def is_anagram(word_a, word_b):
     else:
         word_a, word_b = list(word_a), list(word_b)
         word_a.sort(), word_b.sort()
-        return True if word_a == word_b else False
+        return word_a == word_b
 
 
 if __name__ == '__main__':
