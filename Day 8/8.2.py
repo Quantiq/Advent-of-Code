@@ -2,8 +2,7 @@ def main():
     with open("input.txt") as f:
         content = [i.split() for i in f.read().splitlines()]
 
-    registers = {}
-    x = 0
+    registers, local_max = {}, 0
 
     for lines in content:
         registers[lines[0]] = 0
@@ -18,10 +17,9 @@ def main():
         condition_num = int(lines[6])
 
         if evaluate_condition(registers, condition_key, condition, condition_num):
-            x, currentregisters = update_registers(x, registers, key_to_change, add_sub, num_to_change_by)
+            local_max = update_registers(local_max, registers, key_to_change, add_sub, num_to_change_by)
+    print(local_max)
 
-    print(max(registers.values()))
-    print(x)
 
 def evaluate_condition(registers, key, condition, num):
     if condition == '==':
@@ -38,17 +36,15 @@ def evaluate_condition(registers, key, condition, num):
         return registers[key] >= num
 
 
-def update_registers(x, registers, key, add_sub, num):
+def update_registers(local_max, registers, key, add_sub, num):
     if add_sub == 'inc':
         registers[key] += num
     elif add_sub == 'dec':
         registers[key] -= num
 
-    if registers[key] > x:
-        x = registers[key]
-    return x, registers
-
-    
+    if registers[key] > local_max:
+        local_max = registers[key]
+    return local_max
 
 
 if __name__ == '__main__':

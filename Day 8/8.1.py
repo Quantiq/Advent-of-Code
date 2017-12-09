@@ -2,8 +2,6 @@ def main():
     with open("input.txt") as f:
         content = [i.split() for i in f.read().splitlines()]
 
-    registers = {}
-
     for lines in content:
         registers[lines[0]] = 0
 
@@ -20,6 +18,7 @@ def main():
             registers = update_registers(registers, key_to_change, add_sub, num_to_change_by)
 
     print(max(registers.values()))
+
 
 def evaluate_condition(registers, key, condition, num):
     if condition == '==':
