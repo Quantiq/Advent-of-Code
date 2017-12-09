@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def main():
     with open("input.txt") as f:
         stream = list(f.read())
