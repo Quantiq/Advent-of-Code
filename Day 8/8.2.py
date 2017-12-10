@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def main():
     with open("input.txt") as f:
         content = [i.split() for i in f.read().splitlines()]
@@ -18,6 +20,7 @@ def main():
 
         if evaluate_condition(registers, condition_key, condition, condition_num):
             local_max = update_registers(local_max, registers, key_to_change, add_sub, num_to_change_by)
+
     print(local_max)
 
 

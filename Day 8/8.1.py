@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def main():
     with open("input.txt") as f:
         content = [i.split() for i in f.read().splitlines()]
