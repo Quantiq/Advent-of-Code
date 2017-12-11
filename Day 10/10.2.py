@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def main():
     with open("testinput.txt") as f:
         lengths = [ord(i) for i in f.read()]
@@ -11,9 +13,6 @@ def main():
     
     print(knot_hash)
 
-    # test = "7f94112db4e32e19cf6502073c66f9bb"
-    # if knot_hash == test:
-    #     print("Yes")
 
 def dense_hasher(hash_block):
     n = hash_block[0] ^ hash_block[1]
