@@ -2,17 +2,17 @@
 
 def main():
     with open("input.txt") as f:
-        content = list(f.read())
+        content = [int(i) for i in f.read().strip()]
 
     total = 0
 
     for index, i in enumerate(content):
         if index + 1 < len(content):
-            if int(i) == int(content[index + 1]):
-                total += int(i)
+            if i == content[index + 1]:
+                total += i
         else:
-            if int(i) == int(content[0]):
-                total += int(i)
+            if i == content[0]:
+                total += i
     print(total)
 
 
