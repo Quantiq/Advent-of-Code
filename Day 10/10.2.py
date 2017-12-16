@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 
+from functools import reduce
+
 def main():
-    with open("testinput.txt") as f:
+    with open("input.txt") as f:
         lengths = [ord(i) for i in f.read()]
 
+    print(knot_hasher(lengths))
+
+
+def knot_hasher(lengths):
     sparse_hash = sparse_hasher(lengths)
     knot_hash = ""
 
-    for i in range(0,256,16):
-        n = dense_hasher(sparse_hash[i:i+16])
-        knot_hash += "{:02x}".format(n)
-    
-    print(knot_hash)
+    for i in range(0, 256, 16):
+        dense_hash = reduce(lambda x, y: x^y, sparse_hash[i:i+16])
+        knot_hash += "{:02x}".format(dense_hash)
 
-
-def dense_hasher(hash_block):
-    n = hash_block[0] ^ hash_block[1]
-    for i in range(2, len(hash_block)):
-        n ^= hash_block[i]
-    return n
+    return knot_hash
 
 
 def sparse_hasher(lengths):
