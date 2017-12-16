@@ -12,7 +12,7 @@ def main():
         a = (a * 16807) % 2147483647
         b = (b * 48271) % 2147483647
 
-        if (a & 0xffff) == (b & 0xffff):
+        if a & 0xffff == b & 0xffff:
             count += 1
 
     print(count)

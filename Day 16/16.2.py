@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def main():
     with open("input.txt") as f:
         content = f.read().strip().split(",")
@@ -13,7 +15,6 @@ def main():
         for move in moves:
             programs = dance(move, programs)
 
-
     print(iters_list[1000000000 % i])
 
 
@@ -24,7 +25,7 @@ def dance(move, programs):
     if move[0] == 'spin':
         s = move[1]
         programs = programs[-s:] + programs[:-s]
-    elif move[0] == 'xchange':
+    elif move[0] == 'exchange':
         a = move[1]
         b = move[2]
         programs[a], programs[b] = programs[b], programs[a]
@@ -46,8 +47,8 @@ def parse_input(content):
         elif i[0] == 's':
             moves.append(['spin', int(i[1:])])
         elif i[0] == 'x':
-            tup = i.strip('x').split('/')
-            moves.append(['xchange', int(tup[0]), int(tup[1])])
+            a = i.strip('x').split('/')
+            moves.append(['exchange', int(a[0]), int(a[1])])
 
     return moves
 

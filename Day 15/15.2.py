@@ -19,7 +19,7 @@ def main():
             if b % 8 == 0:
                 break
 
-        if (a & 0xffff) == (b & 0xffff):
+        if a & 0xffff == b & 0xffff:
             count += 1
 
     print(count)
