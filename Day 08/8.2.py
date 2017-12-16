@@ -1,53 +1,51 @@
 #!/usr/bin/env python3
 
+import operator
+
 def main():
     with open("input.txt") as f:
         content = [i.split() for i in f.read().splitlines()]
 
-    registers, local_max = {}, 0
+    registers = {lines[0]: 0 for lines in content}
+    l_max = 0
 
     for lines in content:
-        registers[lines[0]] = 0
-
-    for lines in content:
-        key_to_change = lines[0]
-        add_sub = lines[1]
-        num_to_change_by = int(lines[2])
+        key_a = lines[0]
+        op_a = lines[1]
+        num_a = int(lines[2])
         
-        condition_key = lines[4]
-        condition = lines[5]
-        condition_num = int(lines[6])
+        key_b = lines[4]
+        op_b = lines[5]
+        num_b = int(lines[6])
 
-        if evaluate_condition(registers, condition_key, condition, condition_num):
-            local_max = update_registers(local_max, registers, key_to_change, add_sub, num_to_change_by)
+        if evaluate_condition(registers, key_b, op_b, num_b):
+            l_max = update_registers(l_max, registers, key_a, op_a, num_a)
 
-    print(local_max)
+    print(l_max)
 
 
 def evaluate_condition(registers, key, condition, num):
-    if condition == '==':
-        return registers[key] == num
-    elif condition == '!=':
-        return registers[key] != num
-    elif condition == '<':
-        return registers[key] < num
-    elif condition == '<=':
-        return registers[key] <= num
-    elif condition == '>':
-        return registers[key] > num
-    elif condition == '>=':
-        return registers[key] >= num
+    condition_table = {
+        '==': operator.eq,
+        '!=': operator.ne,
+        '<': operator.lt,
+        '<=': operator.le,
+        '>': operator.gt,
+        '>=': operator.ge,
+    }
+    
+    return condition_table[condition](registers[key], num)
 
 
-def update_registers(local_max, registers, key, add_sub, num):
-    if add_sub == 'inc':
+def update_registers(l_max, registers, key, condition, num):
+    if condition == 'inc':
         registers[key] += num
-    elif add_sub == 'dec':
+    elif condition == 'dec':
         registers[key] -= num
 
-    if registers[key] > local_max:
-        local_max = registers[key]
-    return local_max
+    if registers[key] > l_max:
+        l_max = registers[key]
+    return l_max
 
 
 if __name__ == '__main__':
