@@ -20,6 +20,20 @@ def main():
     print(max_v - min_v)
 
 
+def pairs_count(str):
+    # returns a dict of pair counts from the intial polymer string
+
+    pairs = {}
+
+    for i in range(len(str) - 1):
+        key = str[i] + str[i + 1]
+        if key not in pairs:
+            pairs[key] = 1
+        else:
+            pairs[key] += 1
+    return pairs 
+
+
 def solve(steps, pairs, ltr_count, pair_rules):
     # returns a dict of letter counts
 
@@ -53,20 +67,6 @@ def solve(steps, pairs, ltr_count, pair_rules):
     
         pairs = new_pairs  # after 1 iteration let list of pairs = the new list of pairs
     return ltr_count
-
-
-def pairs_count(str):
-    # returns a dict of pair counts from the intial polymer string
-
-    pairs = {}
-
-    for i in range(len(str) - 1):
-        key = str[i] + str[i + 1]
-        if key not in pairs:
-            pairs[key] = 1
-        else:
-            pairs[key] += 1
-    return pairs 
 
 
 if __name__ == '__main__':

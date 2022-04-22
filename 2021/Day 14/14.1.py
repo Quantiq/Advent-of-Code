@@ -14,7 +14,7 @@ def main():
     for step in range(steps):
 
         new_pairs = pairs.copy()
-        offset = 0       # offset
+        offset = 0  # offset
 
         for i in range(len(pairs) - 1):
             for rule in pair_rules:
